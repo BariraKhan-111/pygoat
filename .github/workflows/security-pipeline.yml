@@ -22,8 +22,8 @@ jobs:
         with:
           # FRIEND: CHANGE THESE TWO LINES TO MATCH YOUR SONARCLOUD INFO!
           args: >
-            -Dsonar.projectKey=PUT_YOUR_PROJECT_KEY_HERE
-            -Dsonar.organization=PUT_YOUR_ORGANIZATION_HERE
+            -Dsonar.projectKey=project-team-123_pygoat
+            -Dsonar.organization=project-team-123
 
   dast_scan:
     name: OWASP ZAP DAST
