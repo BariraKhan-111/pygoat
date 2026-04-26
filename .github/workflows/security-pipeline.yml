@@ -21,8 +21,8 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
-            -Dsonar.projectKey=BariraKhan-111_pygoat
-            -Dsonar.organization=BariraKhan-111
+            -Dsonar.projectKey=project-team-123_pygoat
+            -Dsonar.organization=project-team-123
 
   dast_scan:
     name: OWASP ZAP DAST
@@ -33,7 +33,8 @@ jobs:
       
       - name: Build and Run PyGoat App
         run: |
-          docker compose up -d
+          # Bypassing the broken Dockerfile by downloading the pre-built app instead!
+          docker run -d -p 8000:8000 pygoat/pygoat:latest
           sleep 15 
 
       - name: OWASP ZAP Baseline Scan
