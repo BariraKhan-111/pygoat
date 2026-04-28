@@ -1,8 +1,10 @@
 name: DevSecOps Pipeline
+
 on:
   push:
     branches: [ "master", "main" ]
-  workflow_dispatch:  # <--- Add this line!
+  workflow_dispatch:
+
 jobs:
   sast_scan:
     name: SonarQube SAST
@@ -31,9 +33,13 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
       
+      # This step fixes the "Permission Denied" error when ZAP runs
+      - name: Fix Directory Permissions
+        run: sudo chmod -R a+w .
+
       - name: Build and Run PyGoat App
         run: |
-          # Bypassing the broken Dockerfile by downloading the pre-built app instead!
+          # Bypassing the broken Dockerfile by downloading the pre-built app
           docker run -d -p 8000:8000 pygoat/pygoat:latest
           sleep 15 
 
@@ -43,7 +49,8 @@ jobs:
           target: 'http://localhost:8000'
           rules_file_name: '.zap/rules.tsv'
           cmd_options: '-a'
-          fail_action: false 
+          fail_action: false
+          
       - name: Upload ZAP Report
         uses: actions/upload-artifact@v4
         if: always() 
