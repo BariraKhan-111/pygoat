@@ -22,6 +22,7 @@ jobs:
           args: >
             -Dsonar.projectKey=ci-cd2_pygoat
             -Dsonar.organization=ci-cd2
+            -Dsonar.qualitygate.wait=false
 
   dast_scan:
     name: OWASP ZAP DAST
