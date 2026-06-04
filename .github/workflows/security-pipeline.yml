@@ -30,7 +30,7 @@ jobs:
 
   dast_scan:
     name: OWASP ZAP DAST
-    needs: sast_scan      # <--- SEQUENTIAL SCANNING UPDATE: This forces DAST to wait until SAST finishes successfully.
+    needs: sast_scan 
     runs-on: ubuntu-latest
     permissions:
       issues: write
@@ -38,7 +38,7 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-            - name: Build and Run PyGoat App
+      - name: Build and Run PyGoat App
         run: |
           docker run -d -p 8000:8000 pygoat/pygoat:latest
           echo "Verifying application availability..."
