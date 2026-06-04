@@ -40,7 +40,12 @@ jobs:
 
       - name: Build and Run PyGoat App
         run: |
-          docker run -d -p 8000:8000 pygoat/pygoat:latest
+          # 1. Build the Docker image from your newly fixed Dockerfile
+          docker build -t local-pygoat .
+          
+          # 2. Run your new, locally built image
+          docker run -d -p 8000:8000 local-pygoat
+          
           echo "Verifying application availability..."
           for i in {1..20}; do
             if curl -s http://localhost:8000 > /dev/null; then
