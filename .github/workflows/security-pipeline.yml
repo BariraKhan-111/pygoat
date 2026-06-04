@@ -38,10 +38,9 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Build and Run PyGoat App
+            - name: Build and Run PyGoat App
         run: |
-          docker build -t local-pygoat .
-          docker run -d -p 8000:8000 local-pygoat
+          docker run -d -p 8000:8000 pygoat/pygoat:latest
           echo "Verifying application availability..."
           for i in {1..20}; do
             if curl -s http://localhost:8000 > /dev/null; then
